@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/news-app/static/css/main.94474c16.css",
+    "main.js": "/news-app/static/js/main.35ca2f65.js",
+    "static/js/453.08c78f33.chunk.js": "/news-app/static/js/453.08c78f33.chunk.js",
+    "static/media/Ripple@1x-1.3s-200px-200px.gif": "/news-app/static/media/Ripple@1x-1.3s-200px-200px.a8339ef2cee5ab48d827.gif",
+    "index.html": "/news-app/index.html",
+    "main.94474c16.css.map": "/news-app/static/css/main.94474c16.css.map",
+    "main.35ca2f65.js.map": "/news-app/static/js/main.35ca2f65.js.map",
+    "453.08c78f33.chunk.js.map": "/news-app/static/js/453.08c78f33.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.94474c16.css",
+    "static/js/main.35ca2f65.js"
+  ]
+}
