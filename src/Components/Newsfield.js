@@ -6,30 +6,51 @@ import PropTypes from 'prop-types'
 
 export class Newsfield extends Component {
   static defaultProps = {
-    category : "general",
+      category: 'general',
+  };
+
+  static propTypes = {
+      category: PropTypes.string,
+  };
+
+  constructor(props) {
+      super(props);
+      this.state = {
+          articles: [],
+          page: 1,
+          loading: false,
+      };
   }
-   static propTypes = {
-     category: PropTypes.string,
-   }  
-    constructor(){
-        super();
-        this.state = {
-            articles: [],
-            page: 1,
+
+  async updateNews() {
+    this.setState({ loading: true });
+    const url = `http://localhost:5000/news?pageSize=10&page=${this.state.page}&category=${this.props.category}`;
+    console.log(`Fetching data from: ${url}`); // Debugging: log the fetch URL
+    
+    try {
+        const data = await fetch(url);
+        const parsedData = await data.json();
+        console.log(parsedData);
+        this.setState({
+            articles: parsedData.articles,
+            totalResults: parsedData.totalResults,
             loading: false,
-        }
+        });
+    } catch (error) {
+        console.error("Error fetching data:", error);
+        this.setState({ loading: false });
     }
-    async updateNews(){
-      let url = `https://newsapi.org/v2/top-headlines?country=us&category=${this.props.category}&apiKey=a53dba2494e74a4cb148aee8964fbd36&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-        this.setState({loading: true})
-        let data1 = await fetch(url)
-        let parsedData = await data1.json()
-        console.log(parsedData)
-        this.setState ({articles: parsedData.articles, totalResults: parsedData.totalResults, loading: false})
-    }
-    async componentDidMount(){
-      this.updateNews()
-    }
+}
+
+  componentDidMount() {
+      this.updateNews();
+  }
+
+  componentDidUpdate(prevProps) {
+      if (this.props.category !== prevProps.category) {
+          this.setState({ page: 1 }, () => this.updateNews()); // Reset page to 1 on category change
+      }
+  }
     haprev = async()=>{
       
       this.setState({page: this.state.page - 1 })
